@@ -182,6 +182,28 @@ ios-coding-skills/
 
 ---
 
+## 插件开发
+
+如果你想开发类似的 Claude Code 插件，请参考 [PLUGIN_DEVELOPMENT_GUIDE.md](PLUGIN_DEVELOPMENT_GUIDE.md) 文档。
+
+该文档包含：
+- 插件 vs 技能的区别
+- 查询过程和参考方案
+- 具体实现步骤
+- 验证方法和常见问题
+- 快速模板和参考资料
+
+快速开始：
+```bash
+# 验证插件格式
+claude plugin validate .
+
+# 查看已安装插件
+/plugin list
+```
+
+---
+
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request！
