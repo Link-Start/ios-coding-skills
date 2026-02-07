@@ -14,17 +14,27 @@
 | `/oc-to-swift` | OC 转 Swift 规范 |
 | `/ios-permissions` | iOS 权限请求处理 |
 
-## 安装
+## 安装方式
 
-### 方式 1：手动复制
-
-将 `.claude/skills/` 目录下的文件复制到你项目的 `.claude/skills/` 目录：
+### 方式 1：通过插件市场安装（推荐）
 
 ```bash
-cp -r ~/Desktop/ios-coding-skills/.claude/skills/* /你的项目/.claude/skills/
+# 安装插件
+/plugin marketplace add Link-Start/ios-coding-skills
+
+# 启用插件
+/plugin enable ios-coding-skills
 ```
 
-### 方式 2：使用安装脚本
+### 方式 2：手动复制 skill 文件
+
+将 `skills/` 目录下的文件复制到你项目的 `.claude/skills/` 目录：
+
+```bash
+cp -r ~/Desktop/ios-coding-skills/skills/* /你的项目/.claude/skills/
+```
+
+### 方式 3：使用安装脚本
 
 ```bash
 cd ~/Desktop/ios-coding-skills
@@ -32,11 +42,11 @@ chmod +x install.sh
 ./install.sh /你的项目路径
 ```
 
-### 方式 3：Git Submodule（推荐）
+### 方式 4：Git Submodule
 
 ```bash
 cd 你的项目
-git submodule add https://github.com/你的用户名/ios-coding-skills.git .claude/skills
+git submodule add https://github.com/Link-Start/ios-coding-skills.git .claude/skills
 ```
 
 ## 使用方法
@@ -48,9 +58,36 @@ git submodule add https://github.com/你的用户名/ios-coding-skills.git .clau
 请使用 /snapkit 查看约束编写规范
 ```
 
+## 插件结构
+
+```
+ios-coding-skills/
+├── .claude-plugin/
+│   └── plugin.json         # 插件配置
+├── skills/                 # Skill 文件
+│   ├── coding-standards/
+│   │   └── SKILL.md
+│   ├── snapkit/
+│   │   └── SKILL.md
+│   ├── swift6-concurrency/
+│   │   └── SKILL.md
+│   ├── xib-to-swift/
+│   │   └── SKILL.md
+│   ├── oc-to-swift/
+│   │   └── SKILL.md
+│   ├── xcode-errors/
+│   │   └── SKILL.md
+│   └── ios-permissions/
+│       └── SKILL.md
+├── .claude/skills/         # 旧版技能文件（兼容性）
+├── install.sh              # 安装脚本
+├── LICENSE                 # MIT 许可证
+└── README.md               # 本文件
+```
+
 ## 技能列表
 
-### coding-standards.md
+### coding-standards
 - 颜色和字体使用规范
 - 命名规范
 - UI 组件初始化
@@ -60,41 +97,39 @@ git submodule add https://github.com/你的用户名/ios-coding-skills.git .clau
 - 网络请求规范
 - 相对宽度计算
 - 渐变色设置
-- 富文本设置
 - RxSwift 内存管理
 - MARK 分组规范
 
-### snapkit.md
+### snapkit
 - 约束属性编写顺序
 - leading/trailing vs left/right
 - 约束编写风格要点
 - 约束更新规则
 - updateConstraints 使用规范
 
-### swift6-concurrency.md
+### swift6-concurrency
 - @MainActor 类中的 deinit
 - 网络请求闭包 @Sendable 标记
 - 设置 UI 必须在主线程
 - 网络请求后更新 UI
 - Swift 6 并发检查清单
 
-### xib-to-swift.md
+### xib-to-swift
 - 转换步骤
 - 属性声明规范
 - 颜色转换规则
 - 字体转换规则
 - 渐变背景处理
 - 圆角处理
-- 相对宽度计算
 
-### oc-to-swift.md
+### oc-to-swift
 - 网络请求写法差异
 - 页面跳转和 dismiss
 - 内存管理
 - 类型转换
 - 常见错误
 
-### xcode-errors.md
+### xcode-errors
 - Xcode 界面问题（分屏失效、频繁崩溃）
 - 常见编译错误
 - CocoaPods 相关错误
@@ -102,31 +137,13 @@ git submodule add https://github.com/你的用户名/ios-coding-skills.git .clau
 - SwiftLint 错误
 - 清理缓存步骤
 
-### ios-permissions.md
+### ios-permissions
 - 麦克风、相机、相册权限
 - 位置、推送通知权限
 - 蓝牙、联系人、日历权限
 - 面容 ID / 触摸 ID
 - Swift 6 并发安全
 - 常见错误清单
-
-## 项目结构
-
-```
-ios-coding-skills/
-├── .claude/
-│   └── skills/              # Skill 文件
-│       ├── coding-standards.md
-│       ├── snapkit.md
-│       ├── swift6-concurrency.md
-│       ├── xib-to-swift.md
-│       ├── oc-to-swift.md
-│       ├── xcode-errors.md
-│       └── ios-permissions.md
-├── install.sh               # 安装脚本
-├── LICENSE                  # MIT 许可证
-└── README.md                # 本文件
-```
 
 ## 兼容性
 
@@ -150,32 +167,8 @@ ios-coding-skills/
 - 字体使用：PingFangSCXXX(size:) 格式，必须带 size: 参数标签
 - SnapKit 约束顺序：top → leading → bottom → trailing → center → width → height
 - 必须使用 leading/trailing 而不是 left/right
-- UICollectionView 使用：registerCellClass_ls 和 dequeueReusableCell_ls
 - RxSwift 闭包：使用 [weak self] 和 guard let self
 - MARK 注释：必须使用中文
-```
-
-### GitHub Copilot
-
-在代码中添加注释引导：
-
-```swift
-// TODO: 遵循 iOS 编码规范，使用 SnapKit 设置约束
-// 约束顺序：top → leading → bottom → trailing → center → width → height
-```
-
-### 通用方式：项目文档
-
-将本仓库克隆到项目的 `Docs/` 目录，在对话中引用：
-
-```bash
-cd 你的项目
-git clone https://github.com/Link-Start/ios-coding-skills.git Docs/iOS-skills
-```
-
-使用时告诉 AI：
-```
-请参考 Docs/iOS-skills/.claude/skills/coding-standards.md 中的规范
 ```
 
 ### 转换为其他格式
@@ -200,5 +193,6 @@ MIT License
 ## 相关资源
 
 - [Claude Code 文档](https://claude.ai/code)
+- [Claude Code 插件开发文档](https://github.com/anthropics/claude-code)
 - [SnapKit 文档](http://snapkit.io/docs/)
 - [Swift 6 并发](https://www.swift.org/documentation/concurrency/)

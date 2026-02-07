@@ -1,0 +1,13 @@
+{
+  "name": "ios-coding-skills",
+  "description": "通用 iOS 开发规范 skill 集合，包含编码规范、SnapKit 约束、Swift 6 并发、Xcode 错误、权限处理等",
+  "version": "1.0.0",
+  "author": {
+    "name": "Link-Start",
+    "url": "https://github.com/Link-Start"
+  },
+  "homepage": "https://github.com/Link-Start/ios-coding-skills",
+  "repository": "https://github.com/Link-Start/ios-coding-skills",
+  "license": "MIT",
+  "keywords": ["ios", "swift", "objective-c", "coding-standards", "snapkit", "swift6", "xcode", "skills"]
+}
