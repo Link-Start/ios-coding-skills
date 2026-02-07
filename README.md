@@ -133,6 +133,62 @@ ios-coding-skills/
 - **Claude Code**: 完全兼容 ✅
 - **其他 AI 工具**: 可参考内容，需格式转换
 
+---
+
+## 其他 AI 工具使用方法
+
+本仓库的技能文件使用 Claude Code 特定的 YAML front matter 格式，其他 AI 工具不能直接使用。但你可以参考以下方式复用内容：
+
+### Cursor（推荐）
+
+在项目根目录创建 `.cursorrules` 文件：
+
+```rules
+# iOS 编码规范
+
+- 颜色使用：使用项目定义的 UIColor_XXXXX() 函数
+- 字体使用：PingFangSCXXX(size:) 格式，必须带 size: 参数标签
+- SnapKit 约束顺序：top → leading → bottom → trailing → center → width → height
+- 必须使用 leading/trailing 而不是 left/right
+- UICollectionView 使用：registerCellClass_ls 和 dequeueReusableCell_ls
+- RxSwift 闭包：使用 [weak self] 和 guard let self
+- MARK 注释：必须使用中文
+```
+
+### GitHub Copilot
+
+在代码中添加注释引导：
+
+```swift
+// TODO: 遵循 iOS 编码规范，使用 SnapKit 设置约束
+// 约束顺序：top → leading → bottom → trailing → center → width → height
+```
+
+### 通用方式：项目文档
+
+将本仓库克隆到项目的 `Docs/` 目录，在对话中引用：
+
+```bash
+cd 你的项目
+git clone https://github.com/Link-Start/ios-coding-skills.git Docs/iOS-skills
+```
+
+使用时告诉 AI：
+```
+请参考 Docs/iOS-skills/.claude/skills/coding-standards.md 中的规范
+```
+
+### 转换为其他格式
+
+| 目标工具 | 转换方式 |
+|---------|---------|
+| Cursor | 复制内容到 `.cursorrules` |
+| Continue | 转换为 `config.json` 规则 |
+| Codeium | 复制内容到项目文档 |
+| 其他 AI | 直接复制相关规范内容到对话 |
+
+---
+
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request！
